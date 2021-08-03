@@ -31,6 +31,7 @@ class Carousel {
     controls.innerHTML = PAUSE + PREV + NEXT;
 
     this.container.appendChild(controls);
+    controls.classList.add(`controls`);
 
     this.pauseBtn = this.container.querySelector(`#pause-btn`);
     this.prevBtn = this.container.querySelector(`#prev-btn`);
@@ -66,8 +67,8 @@ class Carousel {
     this.indContainer.addEventListener(`click`, this._indicate.bind(this));
     this.container.addEventListener(`mouseenter`, this._pause.bind(this));
     this.container.addEventListener(`mouseleave`, this._play.bind(this));
-
   }
+  
   _gotoNth(n) {
     this.slides[this.currentSlide].classList.toggle(`active`);
     this.indicators[this.currentSlide].classList.toggle(`active`);
