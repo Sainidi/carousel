@@ -116,19 +116,22 @@ just for appearance; change whatever you want
   }
 
   &-pause {
-    position: absolute;
-    display: block;
-    transform: translate(50%, 50%);
     opacity: 0;
     top: calc(50% - 15vh);
-    left: calc(50% - 25vh);
+    left: calc(50% - 12.5vh);
     height: 0;
     padding: 0;
     transition: opacity 0.25s ease-out;
 
+    span {
+      position: absolute;
+      display: block;
+      transform: translate(50%, 50%);
+    }
+
     &:hover,
     &:focus {
-      transition: opacity 1s ease-in 0.5s;
+      transition: opacity 0.5s ease-in 0.5s;
       opacity: 0.7;
       text-shadow: 0 0 30px white;
     }

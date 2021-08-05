@@ -132,14 +132,9 @@ just for appearance; change whatever you want
 }
 
 .control-pause {
-  position: absolute;
-  display: block;
-  -webkit-transform: translate(50%, 50%);
-      -ms-transform: translate(50%, 50%);
-          transform: translate(50%, 50%);
   opacity: 0;
   top: calc(50% - 15vh);
-  left: calc(50% - 20vh);
+  left: calc(50% - 12.5vh);
   height: 0;
   padding: 0;
   -webkit-transition: opacity 0.25s ease-out;
@@ -147,10 +142,18 @@ just for appearance; change whatever you want
   transition: opacity 0.25s ease-out;
 }
 
+.control-pause span {
+  position: absolute;
+  display: block;
+  -webkit-transform: translate(50%, 50%);
+      -ms-transform: translate(50%, 50%);
+          transform: translate(50%, 50%);
+}
+
 .control-pause:hover, .control-pause:focus {
-  -webkit-transition: opacity 1s ease-in 0.5s;
-  -o-transition: opacity 1s ease-in 0.5s;
-  transition: opacity 1s ease-in 0.5s;
+  -webkit-transition: opacity 0.5s ease-in 0.5s;
+  -o-transition: opacity 0.5s ease-in 0.5s;
+  transition: opacity 0.5s ease-in 0.5s;
   opacity: 0.7;
   text-shadow: 0 0 30px white;
 }

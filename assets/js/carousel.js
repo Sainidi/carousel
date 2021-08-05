@@ -23,7 +23,7 @@ class Carousel {
 
   _initControls() {
     const controls = document.createElement(`div`);
-    const PAUSE = `<span id="pause-btn" class="control control-pause">${this.isPlaying ? this.FA_PAUSE : this.FA_PLAY}</span>`;
+    const PAUSE = `<span id="pause-btn" class="control control-pause"><span id="fa-pause-icon">${this.FA_PAUSE}</span><span id="fa-play-icon">${this.FA_PLAY}</span></span>`;
     const PREV = `<span id="prev-btn" class="control control-prev">${this.FA_PREV}</span>`;
     const NEXT = `<span id="next-btn" class="control control-next">${this.FA_NEXT}</span>`;
 
@@ -35,6 +35,11 @@ class Carousel {
     this.pauseBtn = this.container.querySelector(`#pause-btn`);
     this.prevBtn = this.container.querySelector(`#prev-btn`);
     this.nextBtn = this.container.querySelector(`#next-btn`);
+
+    this.pauseIcon = this.container.querySelector("#fa-pause-icon");
+    this.playIcon = this.container.querySelector("#fa-play-icon");
+
+    this.isPlaying ? (this.pauseIcon.style.opacity = 1) : (this.playIcon.style.opacity = 1);
   }
 
   _initIndicators() {
@@ -85,24 +90,24 @@ class Carousel {
 
   _pause() {
     if (this.isPlaying) {
-      clearInterval(this.timerID);
+      this.pauseIcon.style.opacity = 0;
+      this.playIcon.style.opacity = 1;
       this.isPlaying = false;
-      this.pauseBtn.innerHTML = this.FA_PLAY;
+      clearInterval(this.timerID);
     }
   }
 
   _play() {
-    this.timerID = setInterval(() => this._gotoNext(), this.interval);
-    this.isPlaying = true;
-    this.pauseBtn.innerHTML = this.FA_PAUSE;
-  }
-
-  pausePlay() {
-    this.isPlaying ? this._pause() : this._play();
+    if (!this.isPlaying) {
+      this.pauseIcon.style.opacity = 1;
+      this.playIcon.style.opacity = 0;
+      this.isPlaying = true;
+      this.timerID = setInterval(() => this._gotoNext(), this.interval);
+    }
   }
 
   _indicate(e) {
-    const target = e.target;
+    let target = e.target;
 
     if (target && target.classList.contains(`indicator`)) {
       this._pause();
@@ -114,6 +119,10 @@ class Carousel {
     if (e.code === this.CODE_LEFT_ARROW) this.prev();
     if (e.code === this.CODE_RIGHT_ARROW) this.next();
     if (e.code === this.CODE_SPACE) this.pausePlay();
+  }
+
+  pausePlay() {
+    this.isPlaying ? this._pause() : this._play();
   }
 
   prev() {
